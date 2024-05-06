@@ -11,12 +11,14 @@ from sklearn.metrics import accuracy_score, precision_score
 
 import matplotlib.pyplot as plt
 
-from imblearn.over_sampling import RandomOverSampler
 from imblearn.under_sampling import RandomUnderSampler
 
 DATA_PATH = "datasets/heart_2020_cleaned.csv"
 
-def get_data():
+def get_data(): 
+    '''
+    Custom to current dataset but could easily be modified to fit any supervised learning dataset
+    '''
     # Load the dataset
     data = pd.read_csv(DATA_PATH) 
 
@@ -30,11 +32,11 @@ def get_data():
     X = pd.get_dummies(X, drop_first=True)
     y = pd.get_dummies(y, drop_first=True)
 
-    # Step 3: Ensure Numeric Data Types
+    # Convert to Integer
     X = X.astype(int)
     y = y.astype(int)
 
-    # Initialize RandomOverSampler
+    # Initialize RandomUnderSampler
     sampler = RandomUnderSampler()
 
     # Undersample the majority class (No Heart Disease)
@@ -317,6 +319,9 @@ def compare_combined():
 
     model_analysis(mitigator, X_test, y_test, sf_test, X_df)
 
+"""
+Uncomment these to run different models
+"""
 
 # compare_original()
 # compare_ballanced()
